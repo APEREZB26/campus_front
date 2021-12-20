@@ -8,7 +8,8 @@ function App() {
 
   useEffect(() => {
     fetch('https://campus-project.herokuapp.com/student')
-      .then(res => console.log(res))
+      .then(res => res.json())
+      .then(data => setStudents(data))
   }, [])
 
 
@@ -17,15 +18,16 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>Hello Vite + React!</p>
-        <li>
-          {students.map(student => (
-            <div>
-              <p>{student.name} {student.lastNames}</p>
-              <p>{student.email}</p>
-            </div>
-          ))}
+        <ul className="flex flex-wrap">
+          {
+            students.map((student) => (
+              <li>
+                <p>{student.name} - {student.lastnames}</p>
+                <p>{student.email}</p>
+              </li>
+            ))
           }
-        </li>
+        </ul>
       </header>
     </div>
   )
